@@ -31,6 +31,15 @@ find_package(Threads)
 find_library(EDGEX_CSDK_LIB NAMES csdk PATHS ENV CSDK_DIR PATH_SUFFIXES lib)
 find_path(EDGEX_CSDK_INCLUDE NAMES edgex/devsdk.h PATHS ENV CSDK_DIR PATH_SUFFIXES include)
 
+if (NOT EDGEX_CSDK_LIB)
+    message(WARNING "C-SDK library is not found. Try setting environment variable CSDK_DIR to point to the directory\
+    containing the C-SDK library or reinstall the C-SDK.")
+endif()
+if (NOT EDGEX_CSDK_INCLUDE)
+    message(WARNING "C-SDK headers are not found. Try setting environment variable CSDK_DIR to point to the directory\
+    containing the C-SDK headers or reinstall the C-SDK.")
+endif()
+
 SET(BAC_LIB "${CMAKE_SOURCE_DIR}/../../lib/ip/libbacnet.a")
 
 #Uncomment the line below to build BACnet/MSTP
